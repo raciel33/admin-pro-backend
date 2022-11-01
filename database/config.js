@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
 const dbConnection = async() => {
 
     try {
@@ -11,7 +9,7 @@ const dbConnection = async() => {
         tenia // y daba fallo 
         */
         ;
-        await mongoose.connect(process.env.DB_CNN);
+        await mongoose.connect(process.env.DB_CNN); //esta definido en este archivo ('/env)
         console.log("db online");
 
     } catch (error) {

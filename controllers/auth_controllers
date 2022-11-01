@@ -1,0 +1,59 @@
+const { response } = require('express');
+const bcrypt = require('bcryptjs')
+
+//importamos el modelo
+const Usuario = require('../models/usuario');
+const { generarJWT } = require('../helpers/jwt');
+
+const login = async(req, res = response) => {
+
+
+
+    const { email, password } = req.body //extraemos el email y password
+
+    try {
+        //verificar email
+        const usuarioBD = await Usuario.findOne({ email }); //captamos el email
+
+        //si no existe el email
+        if (!usuarioBD) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'email no es valido'
+            })
+        }
+
+        //verificar contraseña
+        /*bcrypt.compareSync: compara la contraseña que escribimos con la que esta en la base de datos
+        (devuelve true si coincide)
+        */
+        const validPassword = bcrypt.compareSync(password, usuarioBD.password);
+        //
+        if (!validPassword) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'password no es valido'
+            })
+        }
+
+        //Generar un tokens
+        //generarJWT: viene de /heplpers/jw.js
+        const token = await generarJWT(usuarioBD.id);
+
+        res.json({
+            ok: true,
+            token
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        })
+
+    }
+}
+
+module.exports = {
+    login
+}
