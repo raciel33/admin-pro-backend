@@ -17,15 +17,34 @@ const { generarJWT } = require('../helpers/jwt');
 //FUNCION QUE DEVUELVE LOS USUARIOS DE MONGOBD
 const getUsuarios = async(req, resp) => {
 
-    /*
-      Usuario.find();: devuelve todos los campos
-       Usuario.find( {}, 'nombre email'); especificamos los campos que queremos 
-    
-    */
-    const usuarios = await Usuario.find();
+    //HACIENDO PAGINACION
+    //obtenemos parametro opcional ('desde') del url y si no tiene parametro opcional utiliza el cero
+    const desde = Number(req.query.desde);
+    console.log(desde);
+
+
+
+    // Promise.all: para ejecutar varias promesasa simultaneamente y que no haya conflicto
+
+    //Promise1-> usuarios = Usuario.find().skip(desde).limit(5),
+    //Promise2-> total = Usuario.count()
+
+    const [usuarios, total] = await Promise.all([
+
+        // Usuario.find();: devuelve todos los campos
+        //  Usuario.find( {}, 'nombre email'); especificamos los campos que queremos 
+        //PAGINACION!!!!!!!
+        //skip( desde ) obtiene el resultado a partir de aqui
+        //limit( 5 ): definimos el numero de resultados a obtener
+
+        Usuario.find().skip(desde).limit(5),
+        Usuario.count()
+    ])
+
     resp.json({
         ok: true,
-        usuarios
+        usuarios,
+        total
     });
 };
 
