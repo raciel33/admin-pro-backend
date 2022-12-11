@@ -4,10 +4,9 @@ const bcrypt = require('bcryptjs')
 //importamos el modelo
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
+const { googleVerify } = require('../helpers/google-verify');
 
 const login = async(req, res = response) => {
-
-
 
     const { email, password } = req.body //extraemos el email y password
 
@@ -49,11 +48,63 @@ const login = async(req, res = response) => {
         res.status(500).json({
             ok: false,
             msg: 'Error inesperado'
-        })
+        });
 
     }
 }
 
+const googleSingIn = async(req, res = response) => {
+
+    try {
+        //captamos los campos que queremos de la respuesta
+        const { email, name, picture } = await googleVerify(req.body.token);
+
+        //console.log(req.body.token);
+        //Nota: req.body.token-->aqui viene el token de google (postman)
+
+        //verificamos si ya existe email
+        const usuarioBD = await Usuario.findOne({ email });
+
+        //si no existe el email crea el usuario
+        let usuario;
+        if (!usuarioBD) {
+            usuario = new Usuario({
+                nombre: name,
+                email: email,
+                password: '@@@', //no se utiliza aqui, lo ponemos pa que no de conflicto
+                img: picture,
+                google: true
+            })
+        } else {
+            //si el usuario existe
+            usuario = usuarioBD;
+            usuario.google = true;
+        }
+        //guardar usuario
+        await usuario.save();
+
+        //Generar un token
+        //generarJWT: viene de /heplpers/jw.js
+        const token = await generarJWT(usuario.id);
+
+        res.json({
+            ok: true,
+            email,
+            name,
+            picture,
+            token,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: false,
+            msg: 'el token de google no es valido'
+        })
+    }
+
+}
 module.exports = {
-    login
+    login,
+    googleSingIn
 }
