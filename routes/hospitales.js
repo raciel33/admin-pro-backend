@@ -25,7 +25,11 @@ router.post('/', [validarJWT,
 
 
 //actualizar hospitales
-router.put('/:id', [],
+router.put('/:id', [
+        validarJWT,
+        check('nombre', 'el nombre del hospital es necesario').not().isEmpty(),
+
+    ],
     actualizarHospital);
 
 //eliminar hospitales

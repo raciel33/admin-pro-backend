@@ -104,7 +104,23 @@ const googleSingIn = async(req, res = response) => {
     }
 
 }
+
+const rewToken = async(req, res = response) => {
+
+
+    const uid = req.uid;
+
+    //Generar un tokens
+    //generarJWT: viene de /heplpers/jw.js
+    const token = await generarJWT(uid);
+
+    res.json({
+        ok: true,
+        token
+    })
+}
 module.exports = {
     login,
-    googleSingIn
+    googleSingIn,
+    rewToken
 }
