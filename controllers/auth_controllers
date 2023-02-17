@@ -105,8 +105,7 @@ const googleSingIn = async(req, res = response) => {
 
 }
 
-const rewToken = async(req, res = response) => {
-
+const renewToken = async(req, res = response) => {
 
     const uid = req.uid;
 
@@ -114,13 +113,19 @@ const rewToken = async(req, res = response) => {
     //generarJWT: viene de /heplpers/jw.js
     const token = await generarJWT(uid);
 
+    //Obtener el usuario por UID
+    const usuarioBD = await Usuario.findById(uid);
+
+
     res.json({
         ok: true,
-        token
+        usuarioBD,
+        token,
+
     })
 }
 module.exports = {
     login,
     googleSingIn,
-    rewToken
+    renewToken
 }

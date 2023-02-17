@@ -17,7 +17,32 @@ const getMedicos = async(req, resp = response) => {
     });
 };
 
+//FUNCION QUE DEVUELVE LOS un especifico medico DE MONGOBD
+const getMedicosById = async(req, resp = response) => {
 
+    const id = req.params.id; //captamos el id del medico a actualizar
+
+    try {
+        /**NOTA: con la funcion popularte() podemos extraer facilmente el usuario y los hospitales que creo el medico
+         * y acceder a sus campos nombre, email, etc...
+         */
+        const medico = await Medico.findById(id).populate('usuario', 'nombre img').populate('hospital', 'nombre');
+
+        resp.json({
+            ok: true,
+            medico
+        });
+
+    } catch (error) {
+        resp.json({
+            ok: true,
+            msg: 'hable con el administrador'
+        });
+
+    }
+
+
+};
 //-----------------------------------------------------------------------------------------
 const crearMedico = async(req, resp = response) => {
 
@@ -142,5 +167,6 @@ module.exports = {
     getMedicos,
     crearMedico,
     actualizarMedico,
-    borrarMedico
+    borrarMedico,
+    getMedicosById
 }

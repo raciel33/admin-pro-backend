@@ -22,8 +22,6 @@ const getUsuarios = async(req, resp) => {
     const desde = Number(req.query.desde);
     console.log(desde);
 
-
-
     // Promise.all: para ejecutar varias promesasa simultaneamente y que no haya conflicto
 
     //Promise1-> usuarios = Usuario.find().skip(desde).limit(5),
@@ -145,7 +143,16 @@ const actualizarUsuario = async(req, res = response) => {
 
         }
 
-        campos.email = email;
+        //si no es un usuario de google
+        if (!usuarioDB.google) {
+            campos.email = email;
+
+        } else if (usuarioDB !== email) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Usuario de google no pueden cambiar el email'
+            })
+        }
 
 
         //findByIdAndUpdate ( uid, campos) (el primer parametro 'uid' indicamos que usuario queremos actualizar y el segundo 'campos' los campos a a actualizar)

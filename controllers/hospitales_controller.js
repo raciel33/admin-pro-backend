@@ -6,10 +6,11 @@ const Hospital = require('../models/hospital');
 //FUNCION QUE DEVUELVE LOS hospitales DE MONGOBD
 const getHospitales = async(req, resp = response) => {
 
-    /**NOTA: con la funcion popularte() podemos extraer facilmente el usuario que creo el hospital
+    /**NOTA: con la funcion populate() podemos extraer facilmente el usuario que creo el hospital
      * y acceder a sus campos nombre, email, etc...
      */
     const hospitales = await Hospital.find().populate('usuario', 'nombre img');
+
     resp.json({
         ok: true,
         hospitales

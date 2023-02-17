@@ -3,7 +3,7 @@
  */
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { rewToken } = require('../controllers/auth_controllers');
+const { renewToken } = require('../controllers/auth_controllers');
 const { googleSingIn } = require('../controllers/auth_controllers');
 
 
@@ -32,7 +32,7 @@ router.post('/google', [
 //saca al usuario cuando expire el token
 router.get('/renew',
     validarJWT,
-    rewToken
+    renewToken
 );
 
 
