@@ -12,7 +12,7 @@ const generarJWT = (uid) => {
         //Aqui esta la palabra secreta definida para firmar los token: process.env.JWT_SECRET
 
         jwt.sign(payload, process.env.JWT_SECRET, {
-            expiresIn: '12h'
+            expiresIn: '24h'
         }, (err, token) => {
             if (err) {
                 console.log(err);

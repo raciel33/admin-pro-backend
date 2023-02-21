@@ -5,6 +5,10 @@ const bcrypt = require('bcryptjs')
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 const { googleVerify } = require('../helpers/google-verify');
+const { getMenuFrontEnd } = require('../helpers/menu-fronted');
+
+
+//FUNCION PARA EL LOGIN
 
 const login = async(req, res = response) => {
 
@@ -39,10 +43,14 @@ const login = async(req, res = response) => {
         //generarJWT: viene de /heplpers/jw.js
         const token = await generarJWT(usuarioBD.id);
 
+        //Si todo va bien devuelve :
         res.json({
             ok: true,
-            token
-        })
+            token,
+            menu: getMenuFrontEnd(usuarioBD.role) //mostrara el menu en dependencia del role que tenga el usuario
+        });
+
+
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -87,12 +95,11 @@ const googleSingIn = async(req, res = response) => {
         //generarJWT: viene de /heplpers/jw.js
         const token = await generarJWT(usuario.id);
 
+        //Si todo va bien devuelve:
         res.json({
             ok: true,
-            email,
-            name,
-            picture,
             token,
+            menu: getMenuFrontEnd(usuarioBD.role) //mostrara el menu en dependencia del role que tenga el usuario
         });
 
     } catch (error) {
@@ -116,11 +123,12 @@ const renewToken = async(req, res = response) => {
     //Obtener el usuario por UID
     const usuarioBD = await Usuario.findById(uid);
 
-
+    //Si todo va bien
     res.json({
         ok: true,
         usuarioBD,
         token,
+        menu: getMenuFrontEnd(usuarioBD.role) //mostrara el menu en dependencia del role que tenga el usuario
 
     })
 }
