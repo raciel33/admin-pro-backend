@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path'); //predefindo de express
 
 const express = require('express');
 const cors = require('cors');
@@ -31,6 +32,11 @@ app.use('/api/todo', require('./routes/busqueda'));
 app.use('/api/uploads', require('./routes/uploads'));
 app.use('/api/login', require('./routes/auth'));
 
+
+//si no es ninguna de las rutas anteriores coje el index.html
+app.get('*', (req, resp) => {
+    resp.sendFile(path.resolve(__dirname, 'public/index.html'));
+})
 
 
 
