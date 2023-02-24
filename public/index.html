@@ -1,52 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <meta charset="utf-8">
+    <title>Adminpro</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-<body>
-    <h1>Google</h1>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
+    <title>Admin Pro Admin Template - The Ultimate Bootstrap 4 Admin Template</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="./assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="./assets/css/style.css" rel="stylesheet">
 
-    <!--el siguiente script viene predefinido en https://developers.google.com/identity/gsi/web/guides/display-button#javascript-->
-    <script>
-        var url = 'http://localhost:3005/api/login/google';
+    <!--NOTA!!! ESTE LINK UTILIZANDO SU ID ES USADO EN ACCOUNT-SETTINGS.TS PARA CAMBIAR DE COLOR LA PAGINA-->
+    <!-- You can change the theme colors from here -->
+    <link href="" id="theme" rel="stylesheet">
 
-        function handleCredentialResponse(response) {
-            // console.log("Encoded JWT ID token: " + response.credential);
-            fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        token: response.credential
-                    })
-                })
-                .then(resp => resp.json())
-                .then(data => console.log('Nuestro server', data))
-                .catch(console.log)
-        }
-        window.onload = function() {
-            google.accounts.id.initialize({
-                //aqui va el cliente_id que tenemos en los env.
-                client_id: "1043557574365-qa8ia97sb1q75vn4eur405137gn2geft.apps.googleusercontent.com",
-                callback: handleCredentialResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById("buttonDiv"), {
-                    theme: "outline",
-                    size: "large"
-                } // customization attributes
-            );
-            google.accounts.id.prompt(); // also display the One Tap dialog
-        }
-    </script>
-    <div id="buttonDiv"></div>
-</body>
+    <script src="https://accounts.google.com/gsi/client" async="" defer=""></script>
+
+<link rel="stylesheet" href="styles.bf917b901c2fbdaa3226.css"></head>
+
+<body class="fix-header card-no-border fix-sidebar">
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Admin Pro</p>
+        </div>
+    </div>
+
+    <app-root></app-root>
+
+
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="./assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="./assets/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="./assets/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./assets/js/custom.js"></script>
+    <!-- ============================================================== -->
+
+    <!--chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script src="runtime.858c55fa80945715cdf7.js" defer></script><script src="polyfills.241eb1bd52670d9a0aa3.js" defer></script><script src="main.4a834d4376df7f504bf3.js" defer></script></body>
 
 </html>
