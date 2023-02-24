@@ -64,7 +64,7 @@ const validarADMIN_ROLE = async(req, res, next) => {
         res.status(500).json({
             ok: false,
             msg: 'hable con el administrador'
-        })
+        });
 
     }
 
@@ -89,7 +89,7 @@ const validarADMIN_ROLE_o_MISMO_USUARIO = async(req, res, next) => {
         //si el role  es 'ADMIN_ROLE' o uid === id es un usuario que se quiere actualizar a si mismo
         if (usuarioDB.role === 'ADMIN_ROLE' || uid === id) {
 
-            next(); //dejalo a actualizar
+            next(); ////dejalo a actualizar
 
         } else {
             res.status(403).json({
@@ -104,7 +104,7 @@ const validarADMIN_ROLE_o_MISMO_USUARIO = async(req, res, next) => {
         res.status(500).json({
             ok: false,
             msg: 'hable con el administrador'
-        })
+        });
 
     }
 
