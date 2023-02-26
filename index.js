@@ -33,10 +33,12 @@ app.use('/api/uploads', require('./routes/uploads'));
 app.use('/api/login', require('./routes/auth'));
 
 
+app.use(express.static(path.join(__dirname, '/public')));
+
 //si no es ninguna de las rutas anteriores coje el index.html
 app.get('*', (req, resp) => {
     resp.sendFile(path.resolve(__dirname, 'public/index.html'));
-})
+});
 
 
 
