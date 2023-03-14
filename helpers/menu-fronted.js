@@ -18,7 +18,7 @@
              titulo: 'Mantenimientos',
              icono: 'mdi mdi-folder-lock-open',
              submenu: [
-                 // { titulo: 'Usuarios', url: 'usuarios'},---SI NO ES ADMIN_ROLE NO SE VA MOSTRAR
+                 { titulo: 'Usuarios', url: 'usuarios' }, //---esto debe ir comentadoSI NO ES ADMIN_ROLE NO SE VA MOSTRAR
                  { titulo: 'Hospitales', url: 'hospitales' },
                  { titulo: 'Medicos', url: 'medicos' }
 
