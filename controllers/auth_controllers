@@ -99,7 +99,7 @@ const googleSingIn = async(req, res = response) => {
         res.json({
             ok: true,
             token,
-            menu: getMenuFrontEnd(usuarioBD.role) //mostrara el menu en dependencia del role que tenga el usuario
+            // menu: getMenuFrontEnd(usuarioBD.role) //mostrara el menu en dependencia del role que tenga el usuario
         });
 
     } catch (error) {

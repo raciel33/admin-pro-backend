@@ -7,10 +7,7 @@
                  { titulo: 'Main', url: '/' },
                  { titulo: 'ProgressBar', url: 'progress' },
                  { titulo: 'Graficas', url: 'grafica1' },
-                 { titulo: 'Promesas', url: 'promesas' },
                  { titulo: 'Rxjs', url: 'rxjs' },
-
-
              ]
 
          },
@@ -18,7 +15,7 @@
              titulo: 'Mantenimientos',
              icono: 'mdi mdi-folder-lock-open',
              submenu: [
-                 { titulo: 'Usuarios', url: 'usuarios' }, //---esto debe ir comentadoSI NO ES ADMIN_ROLE NO SE VA MOSTRAR
+                 // { titulo: 'Usuarios', url: 'usuarios' }, ---esto debe ir comentadoSI NO ES ADMIN_ROLE NO SE VA MOSTRAR
                  { titulo: 'Hospitales', url: 'hospitales' },
                  { titulo: 'Medicos', url: 'medicos' }
 
