@@ -17,6 +17,9 @@ const borrarImagen = (path) => {
 };
 
 
+
+
+
 /**esta funcion actualiza la imagen y elimina la anterior */
 const actualizarImagen = async(tipo, id, nombreArchivo) => {
 
@@ -99,6 +102,41 @@ const actualizarImagen = async(tipo, id, nombreArchivo) => {
 
 };
 
+const actualizarInforme = async(tipo, id, nombreArchivo) => {
+
+
+
+    if (tipo === 'usuarios') {
+
+        //captamos el id del usuario al que queremos acualizar la imagen
+        const usuario = await Usuario.findById(id);
+
+        //comprobamos si existe
+        if (!usuario.id) {
+            console.log('no existe un usuario con ese id');
+            return false;
+        }
+
+
+
+        usuario.informe = usuario.informe.push(nombreArchivo);
+
+
+        //guardamos
+        await usuario.save();
+
+        return true;
+
+
+
+    }
+
+
+};
+
+
+
 module.exports = {
-    actualizarImagen
+    actualizarImagen,
+    actualizarInforme
 }

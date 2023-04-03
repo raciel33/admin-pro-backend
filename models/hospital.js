@@ -8,10 +8,15 @@ const HospitalSchema = Schema({
     },
     img: {
         type: String,
-
     },
     usuario: {
         require: true,
+        //indicamos que hay una relacion entre este documento y models/usuario.js para saber que usuario creo el hospital
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario'
+    },
+    citas: {
+        //require: true,
         //indicamos que hay una relacion entre este documento y models/usuario.js para saber que usuario creo el hospital
         type: Schema.Types.ObjectId,
         ref: 'Usuario'

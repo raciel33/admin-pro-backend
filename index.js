@@ -31,6 +31,11 @@ app.use('/api/login', require('./routes/auth'));
 app.use('/api/todo', require('./routes/busqueda'));
 app.use('/api/uploads', require('./routes/uploads'));
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/citas', require('./routes/citas'));
+app.use('/api/informes', require('./routes/informes'));
+
+
+
 
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -39,10 +44,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get('*', (req, resp) => {
     resp.sendFile(path.resolve(__dirname, 'public/index.html'));
 });
-
-
-
-
 
 
 

@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs')
 
 //importamos el modelo
 const Usuario = require('../models/usuario');
+//instancia de citas
+const Citas = require('../models/citas');
 const { generarJWT } = require('../helpers/jwt');
 
 
@@ -35,7 +37,7 @@ const getUsuarios = async(req, resp) => {
         //skip( desde ) obtiene el resultado a partir de aqui
         //limit( 5 ): definimos el numero de resultados a obtener
 
-        Usuario.find().skip(desde).limit(5),
+        Usuario.find().skip(desde).limit(6),
         Usuario.count()
     ])
 
@@ -212,9 +214,19 @@ const borrarUsuario = async(req, res = response) => {
     }
 }
 
+
+
+//-----------------------------------------------------------------------------------------
+
+
+
+
+
 module.exports = {
     getUsuarios,
     crearUsuario,
     actualizarUsuario,
-    borrarUsuario
+    borrarUsuario,
+
+
 }

@@ -10,7 +10,7 @@ const fs = require('fs');
 
 
 
-const fileUpload = (req, resp = response) => {
+const fileUploadInforme = (req, resp = response) => {
 
     const tipo = req.params.tipo; //captamos el tipo ( hospitales', 'medicos', 'usuarios) en la url
     const id = req.params.id;
@@ -36,7 +36,7 @@ const fileUpload = (req, resp = response) => {
     //PROCESAR LA IMAGEN
 
     //extraemos la imagen (nota: imagen viene del nombre que le damos en postman/body/key)
-    const file = req.files.imagen;
+    const file = req.files.informe;
 
     /*para fraccionar y convertirlo en un array con el objetivo de quedarnos con la teminacion jpg, pdf...
     ej: nombreCortado = 'wolwerine.1.3.jpg
@@ -49,7 +49,7 @@ const fileUpload = (req, resp = response) => {
     const extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
     //validar extencion
-    const extencionesValidasFotos = ['png', 'jpg', 'jpeg', 'gif'];
+    const extencionesValidasFotos = ['doc', 'txt', 'pdf'];
 
 
     if (!extencionesValidasFotos.includes(extensionArchivo)) {
@@ -64,26 +64,21 @@ const fileUpload = (req, resp = response) => {
         //path para guardar la imagen
 
         //indicamos donde se va guardar
-        const path = `./uploads/${tipo}/${nombreArchivo}`;
-        console.log('mi ruta de fotos es ' + path);
+        const path = `./informes/${tipo}/${nombreArchivo}`;
+        console.log('mi ruta de archivo es ' + path);
 
         //mover la imagen (viene de la documentacion de npm i express-fileupload le he adaptado los nombres de las variables)
         file.mv(path, (err) => {
             if (err) {
                 console.log(err);
-                return res.status(500).json({
+                return resp.status(500).json({
                     ok: false,
                     msg: 'error al mover la imagen'
                 });
 
             }
 
-
-            //Actualizar Base de datos
-            //esta funcion esta en los helpers 
-
-
-            actualizarImagen(tipo, id, nombreArchivo);
+            actualizarInforme(tipo, id, nombreArchivo);
 
 
 
@@ -105,21 +100,21 @@ const fileUpload = (req, resp = response) => {
 
 
 
-const retornaImagen = (req, res = response) => {
+const retornaInforme = (req, res = response) => {
 
     const tipo = req.params.tipo; //captamos el tipo ( hospitales', 'medicos', 'usuarios) en la url
     const foto = req.params.foto;
 
     //__dirname: donde esta la aplicacion desplegada
-    const pathImg = path.join(__dirname, `../uploads/${ tipo }/${ foto }`);
+    const pathInforme = path.join(__dirname, `../informes/${ tipo }/${ foto }`);
 
-    console.log(pathImg);
+    console.log(pathInforme);
     //imagen por defecto
-    if (fs.existsSync(pathImg)) {
-        res.sendFile(pathImg);
+    if (fs.existsSync(pathInforme)) {
+        res.sendFile(pathInforme);
     } else {
-        const pathImg = path.join(__dirname, `../uploads/no-img.jpg`);
-        res.sendFile(pathImg);
+        const pathInforme = path.join(__dirname, `../informes/no-img.jpg`);
+        res.sendFile(pathInforme);
     }
 
 }
@@ -128,7 +123,7 @@ const retornaImagen = (req, res = response) => {
 
 
 module.exports = {
-    fileUpload,
-    retornaImagen,
+    fileUploadInforme,
+    retornaInforme,
 
 }

@@ -4,10 +4,10 @@
              titulo: 'Dashboard',
              icono: 'mdi mdi-gauge',
              submenu: [
-                 { titulo: 'Main', url: '/' },
-                 { titulo: 'ProgressBar', url: 'progress' },
+                 { titulo: 'Inicio', url: 'inicio' },
+                 { titulo: 'Donacion', url: 'progress' },
                  { titulo: 'Graficas', url: 'grafica1' },
-                 { titulo: 'Rxjs', url: 'rxjs' },
+                 // { titulo: 'Rxjs', url: 'rxjs' },
              ]
 
          },

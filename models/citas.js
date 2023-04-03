@@ -1,20 +1,23 @@
 const { Schema, model, SchemaType } = require('mongoose');
 
 
-const MedicoSchema = Schema({
-    nombre: {
-        type: String,
-        required: true
-    },
+const CitaSchema = Schema({
+
     especialidad: {
         type: String,
-        required: true
+        require: true
     },
-    img: {
+    fecha: {
         type: String,
+        require: true
+    },
+
+    hora: {
+        type: String,
+        require: true
     },
     usuario: {
-        //indicamos que hay una relacion entre este documento y models/usuario.js para saber que usuario creo el medico
+        //indicamos que hay una relacion entre este documento y models/usuario.js para saber que usuario creo el Cita
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
         require: true
@@ -25,9 +28,9 @@ const MedicoSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Hospital',
 
-    }
+    },
 
-}, { collection: 'Medicos' }); //aqui podemos definir el nombre de la colection
+}, { collection: 'Citas' }); //aqui podemos definir el nombre de la colection
 
 
 /**La siguiente funcion lo que hace es renombrar 
@@ -37,7 +40,7 @@ const MedicoSchema = Schema({
  * 
  * */
 
-MedicoSchema.method('toJSON', function() {
+CitaSchema.method('toJSON', function() {
 
     //extraemos __v,_id de todos los campos de mi objeto
     const { __v, ...object } = this.toObject();
@@ -47,4 +50,4 @@ MedicoSchema.method('toJSON', function() {
 })
 
 
-module.exports = model('medicos', MedicoSchema);
+module.exports = model('Citas', CitaSchema);

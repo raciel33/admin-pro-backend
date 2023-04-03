@@ -15,8 +15,15 @@ const UsuarioSchema = Schema({
         type: String,
         required: true
     },
+    citas: {
+        type: String
+    },
     img: {
         type: String,
+    },
+    informe: {
+        type: Array,
+        default: []
     },
     role: {
         type: String,
