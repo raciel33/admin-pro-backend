@@ -2,22 +2,25 @@ const { response } = require('express');
 
 //instancia de citas
 const Citas = require('../models/citas');
+const Usuarios = require('../models/usuario');
+
 
 //FUNCION QUE DEVUELVE LOS citas DE MONGOBD
 const getCitas = async(req, resp = response) => {
 
-    //const id = req.params.id; //captamos el id del medico a actualizar
 
     /**NOTA: con la funcion popularte() podemos extraer facilmente el usuario y los hospitales de la cita
      * y acceder a sus campos nombre, email, etc...
      */
-    const citas = await Citas.find().populate('usuario', 'nombre img').populate('hospital', 'nombre img');
+    const citas = await Citas.find().populate('usuario', 'nombre img ').populate('hospital', 'nombre img ');
 
     resp.json({
         ok: true,
-        citas
+        citas,
     });
 };
+
+
 
 
 
@@ -43,6 +46,7 @@ const crearCita = async(req, resp = response) => {
             ok: true,
             cita: citaDB
         });
+
     } catch (error) {
         console.log(error)
         resp.status(500).json({
@@ -92,6 +96,7 @@ const borrarCita = async(req, resp = response) => {
 module.exports = {
     getCitas,
     crearCita,
-    borrarCita
+    borrarCita,
+
 
 }

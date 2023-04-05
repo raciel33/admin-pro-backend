@@ -119,7 +119,7 @@ const actualizarInforme = async(tipo, id, nombreArchivo) => {
 
 
 
-        usuario.informe = usuario.informe.push(nombreArchivo);
+        usuario.informe = usuario.informe.push('informe');
 
 
         //guardamos

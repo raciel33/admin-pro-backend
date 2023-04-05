@@ -1,7 +1,7 @@
 const { validarJWT } = require('../middleware/validar-jwt');
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { crearCita, getCitas, borrarCita } = require('../controllers/citas_controllers');
+const { crearCita, getCitas, borrarCita, getCitasId } = require('../controllers/citas_controllers');
 const { validarCampos } = require('../middleware/validar-campos');
 
 const router = Router();
@@ -9,6 +9,8 @@ const router = Router();
 
 //leemos todas las citas
 router.get('/', getCitas);
+
+
 
 //cita de un usuario
 //router.get('/cita/:id', validarJWT, getCitaUsuario);
